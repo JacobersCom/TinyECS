@@ -2,6 +2,8 @@
 add_library(tinyecs
 
 	include/tinyecs/entity.hpp
+	include/tinyecs/HashTable.hpp
+	include/tinyecs/EntityPool.hpp
 	src/tinyecs/entity.cpp
 )
 
