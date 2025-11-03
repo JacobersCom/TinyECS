@@ -50,8 +50,18 @@ bool HashTableInsert(person* p)
     return true;
 }
 
- person *HashTable_lookup(char* name)
- {
+void HashTable_delete(char* name)
+{
+    int index = hash(name);
+    if(HashTable[index] != NULL &&
+    strncmp(HashTable[index]->name, name ,TABLE_SIZE) == 0)
+    {
+        HashTable[index] = NULL;
+    }
+}
+
+person *HashTable_lookup(char* name)
+{
     int index = hash(name);
     if(HashTable[index] != nullptr &&
     strncmp(HashTable[index]->name, name, TABLE_SIZE) == 0)
@@ -62,9 +72,10 @@ bool HashTableInsert(person* p)
     {
         return NULL;
     }
- }
+}
 
-void PrintTable(){
+void PrintTable()
+{
 
     printf("\nStart\n");
     for(int i = 0; i < TABLE_SIZE; i++)
