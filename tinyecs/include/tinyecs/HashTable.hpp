@@ -50,6 +50,20 @@ bool HashTableInsert(person* p)
     return true;
 }
 
+ person *HashTable_lookup(char* name)
+ {
+    int index = hash(name);
+    if(HashTable[index] != nullptr &&
+    strncmp(HashTable[index]->name, name, TABLE_SIZE) == 0)
+    {
+        return HashTable[index];
+    }
+    else
+    {
+        return NULL;
+    }
+ }
+
 void PrintTable(){
 
     printf("\nStart\n");
