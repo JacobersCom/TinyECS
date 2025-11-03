@@ -52,6 +52,7 @@ bool HashTableInsert(person* p)
 
 void PrintTable(){
 
+    printf("\nStart\n");
     for(int i = 0; i < TABLE_SIZE; i++)
     {
         if(HashTable[i] == NULL)
@@ -60,7 +61,8 @@ void PrintTable(){
         }
         else
         {
-            printf("\t%i,\t%s\n", i,  HashTable[i]->name);
+            printf("\t%i,\t%s, \t%i\n", i, HashTable[i]->name, HashTable[i]->age);
         }
     }
+    printf("End\n");
 }
