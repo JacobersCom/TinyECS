@@ -6,10 +6,13 @@
 #define MAX_NAME 256
 #define TABLE_SIZE 10
 
+//Could make this better with a double linked list
 
 struct person {
     char name[MAX_NAME];
     int age;
+
+    struct person *next;
 };
 
 // for testing
@@ -38,40 +41,55 @@ unsigned int hash(char* name)
     return hash_value;
 }
 
+// adds person to the front of the list
 bool HashTableInsert(person* p)
-{
+{ 
     if(p == NULL) return false;
+    //index = p
     int index = hash(p->name);
-    if(HashTable[index] != NULL)
-    {
-        return false; 
-    }
+    //next person = index
+    p->next = HashTable[index];
+    //put p infront of next person
     HashTable[index] = p;
     return true;
 }
 
-void HashTable_delete(char* name)
+person* HashTable_delete(char* name)
 {
     int index = hash(name);
-    if(HashTable[index] != NULL &&
-    strncmp(HashTable[index]->name, name ,TABLE_SIZE) == 0)
+    person *tmp = HashTable[index];
+    person *prev = NULL;
+    while(tmp != NULL && strncmp(tmp->name, name, MAX_NAME) != 0)
     {
-        HashTable[index] = NULL;
+        //saving the starting pointer
+        prev = tmp;
+        //move current pointer to next person
+        tmp = tmp->next;
     }
+    if(tmp == NULL) return NULL;
+    if(prev == NULL){
+        //delete head
+        HashTable[index] = tmp->next;
+    }
+    else
+    {
+        prev->next = tmp->next;
+    } 
+
+    //
+    return tmp;
 }
 
 person *HashTable_lookup(char* name)
 {
     int index = hash(name);
-    if(HashTable[index] != nullptr &&
-    strncmp(HashTable[index]->name, name, TABLE_SIZE) == 0)
+    person *tmp = HashTable[index];
+   
+    while(tmp != NULL && strncmp(tmp->name, name, MAX_NAME) != 0)
     {
-        return HashTable[index];
+        tmp = tmp->next;
     }
-    else
-    {
-        return NULL;
-    }
+    return NULL;
 }
 
 void PrintTable()
@@ -86,7 +104,14 @@ void PrintTable()
         }
         else
         {
-            printf("\t%i,\t%s, \t%i\n", i, HashTable[i]->name, HashTable[i]->age);
+            printf("\t%i\t", i);
+            person *tmp = HashTable[i];
+            while(tmp != NULL){
+
+                printf("%s -", HashTable[i->name]);
+                tmp = tmp->next;
+            }
+
         }
     }
     printf("End\n");

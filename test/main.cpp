@@ -35,6 +35,7 @@ int main() {
 		printf("Found matt\n");
 	}
 	HashTable_delete("genn");
+	
 	PrintTable();
 	return 0;
 }
