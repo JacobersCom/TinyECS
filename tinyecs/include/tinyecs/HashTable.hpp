@@ -108,7 +108,7 @@ void PrintTable()
             person *tmp = HashTable[i];
             while(tmp != NULL){
 
-                printf("%s -", HashTable[i->name]);
+                printf("%s -", tmp->name);
                 tmp = tmp->next;
             }
 
