@@ -6,6 +6,10 @@ struct transform
 	float pos{1.0};
 	float rotate{1.0};
 };
+struct player
+{
+	int health = 1;
+};
 int main() {
 	
 	InitHashTable();
@@ -42,6 +46,7 @@ int main() {
 	HashTable_delete("genn");
 	
 	PrintTable();
-	printf("transform Component ID: %i\n", GetID<transform>());
+	printf("player Component ID: %i\n", GetID<player>());
+	printf("transform component: %i\n", GetID<transform>());
 	return 0;
 }
