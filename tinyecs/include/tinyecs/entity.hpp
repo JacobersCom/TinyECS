@@ -1,11 +1,11 @@
 #pragma once
 //An entity is a genral object used to create new objects with different componenets
-template<typename T>
-class entity{
 
-    public:
-   //Each odject needs a unquie id 
-    int objectID;
-    char* name;
-
-};
+//Returns a unquie id for components
+int componentCounter = 0;
+template<class T>
+int GetID(){
+    
+    static int s_componentId = componentCounter++;
+    return s_componentId;
+}

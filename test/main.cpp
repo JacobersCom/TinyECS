@@ -1,6 +1,11 @@
 #include <tinyecs/entity.hpp>
 #include <iostream>
 #include <tinyecs/HashTable.hpp>
+struct transform
+{
+	float pos{1.0};
+	float rotate{1.0};
+};
 int main() {
 	
 	InitHashTable();
@@ -37,5 +42,6 @@ int main() {
 	HashTable_delete("genn");
 	
 	PrintTable();
+	printf("transform Component ID: %i\n", GetID<transform>());
 	return 0;
 }
